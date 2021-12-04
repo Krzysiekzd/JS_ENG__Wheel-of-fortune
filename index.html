@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="jackpot_styles.css" type="text/css" />
+</head>
+<body>
+<header>WHEEL OF FORTUNE</header>
+<div class="container">
+    <div class="controls_wrapper">
+        <div id="error" style="visibility: hidden"></div>
+        <div class="controls">
+            <button id="start" class='start'>START</button>
+            <!--<button id="equal_probabilities" class='start' style="width: 200px;background-color: cornflowerblue">Set equal custom probabilities</button>-->
+            <div>
+                <label for="probability_mode">Probablity mode:</label>
+                <br>
+                <select id="probability_mode" >
+                    <option value="equal" selected>Equal probabilities</option>
+                    <option value="custom" >Custom probabilities</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="main_window">
+        <div id="winner"></div>
+        <div id="rotation_wrapper">
+            <div id="rotation" class="oultine_blink_class"></div>
+        </div>
+        <div id="arrow"></div>
+    </div>
+
+    <table id="select_table">
+        <tr>
+            <th style="width: 200px">Label</th>
+            <th style="width: 120px">Probability %</th>
+            <th><button id="add_row" class="delete_button">+</button></th>
+        </tr>
+
+    </table>
+
+</div>
+
+
+
+</body>
+<script type="text/javascript" src="jackpot_script.js"></script>
+</html>
