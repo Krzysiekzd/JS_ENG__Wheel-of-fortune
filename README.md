@@ -1,1 +1,2 @@
-# WHEEL_OF_FORTUNE
+# WHEEL OF FORTUNE
+result: https://students.mimuw.edu.pl/~kz419420/JACKPOT/
