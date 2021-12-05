@@ -184,7 +184,7 @@ function rotate_the_wheel(winning_number){
         0,47 - 0,5 (max emotions)
     let additional_margin = getRandomInt(field_deg/100*47, field_deg / 2 - 1)
      */
-    let additional_margin = getRandomInt(field_deg / 20 * 9, field_deg / 2 - 2)
+    let additional_margin = getRandomInt(field_deg / 10*4, field_deg / 2 - 2)
 
     //plus or minus
     if (getRandomInt(0, 1) === 0) {
@@ -197,6 +197,7 @@ function rotate_the_wheel(winning_number){
     // disable wheel blink during rotation
     spin_wheel.style.outlineStyle= 'solid'
     spin_wheel.style.animationName = `none`
+    spin_wheel.style.transform = `rotate(${rotate_to_winner}deg)`
     timeout = setTimeout(() => {
         winner_field.textContent = `${choice_array[winning_number]['label']}`
         //enable wheel blink
