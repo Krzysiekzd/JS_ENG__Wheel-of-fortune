@@ -9,6 +9,7 @@ let timeout = undefined
 let last_option_number = 1
 let probability_mode = document.getElementById('probability_mode')
 let error = document.getElementById('error')
+let blinking_border = document.getElementById('blinking_border')
 function change_probability_inputs_display(){
     //hide or show inputs
     let inputs = document.querySelectorAll('.custom_probability_input')
@@ -53,7 +54,7 @@ function clear_wheel_spin(){
         start.textContent='START'
     }
     clearTimeout(timeout)
-    winner_field.classList.remove('blink_ann_class')
+    winner_field.classList.remove('text_blink_class')
     winner_field.textContent = ``
 
 }
@@ -142,7 +143,6 @@ function clear_wheel() {
     spin_wheel_wrapper.removeChild(spin_wheel)
     spin_wheel = document.createElement('div')
     spin_wheel.id = 'rotation'
-    spin_wheel.classList.add('oultine_blink_class')
     spin_wheel_wrapper.appendChild(spin_wheel)
 }
 function create_wheel_lines(number){
@@ -195,15 +195,16 @@ function rotate_the_wheel(winning_number){
     start.classList.add('start_color')
     spin_wheel_wrapper.classList.add('spin_ann_class')
     // disable wheel blink during rotation
-    spin_wheel.style.outlineStyle= 'solid'
-    spin_wheel.style.animationName = `none`
+    blinking_border.style.borderStyle= 'solid'
+    blinking_border.style.animationName = `none`
     spin_wheel.style.transform = `rotate(${rotate_to_winner}deg)`
     timeout = setTimeout(() => {
         winner_field.textContent = `${choice_array[winning_number]['label']}`
         //enable wheel blink
-        spin_wheel.style.removeProperty('outline-style')
-        spin_wheel.style.removeProperty('animation-name')
-        winner_field.classList.add('blink_ann_class')
+        blinking_border.style.removeProperty('border-style')
+        blinking_border.style.removeProperty('animation-name')
+        winner_field.classList.add('text_blink_class')
+        spin_wheel_wrapper.classList.remove('spin_ann_class')
     }, 10000)
 }
 probability_mode.addEventListener('change', ()=>{

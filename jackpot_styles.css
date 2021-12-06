@@ -49,7 +49,8 @@ header
     position: relative;
     border-radius: 100px;
     border: 6px solid var(--wheel-border-gold);
-    outline: 6px solid var(--arrow-gold);
+    box-shadow: 0 0 0 6px var(--arrow-gold);
+
 
 
 }
@@ -66,10 +67,20 @@ header
     -webkit-box-shadow: 0px 0px 30px 10px var(--wheel-shadow);
     -moz-box-shadow: 0px 0px 30px 10px var(--wheel-shadow);
     box-shadow: 0px 0px 30px 10px var(--wheel-shadow);
-    outline-width: 4px;
     z-index: 10;
 
-
+}
+#blinking_border
+{
+    height: 520px;
+    width: 520px;
+    position: absolute;
+    left: 36.5px;
+    z-index: 11;
+    border: dashed 4px var(--arrow-gold);
+    border-radius: 50%;
+    /* rotate to hide uneven dashed border (Chromium) under the arrow  */
+    transform: rotate(270deg);
 }
 #little_wheel
 {
@@ -81,7 +92,7 @@ header
     z-index: 11;
     left: 280px;
     border: 5px solid var(--arrow-gold);
-    outline: 5px solid var(--wheel-border-gold);
+    box-shadow: 0 0 0 5px var(--wheel-border-gold);
 
 }
 
@@ -95,7 +106,7 @@ header
     position: absolute;
     top: 285px;
     left: -6px;
-    z-index: 10;
+    z-index: 12;
 
 }
 table, th, td
@@ -151,15 +162,17 @@ select
         color: white;
     }
 }
-@keyframes outline-blink {
+
+
+@keyframes border-blink {
     0%{
-        outline-style: solid;
+        border-style: solid;
     }
     50% {
-        outline-style: dashed;
+        border-style: dashed;
     }
     100%{
-        outline-style: solid;
+        border-style: solid;
     }
 
 }
@@ -171,14 +184,15 @@ select
     animation-fill-mode: forwards;
     animation-timing-function: cubic-bezier(.29,1.0,.49,1.0);
 }
-.blink_ann_class
+.text_blink_class
 {
     animation-name: text-blink;
     animation-duration: 1s;
     animation-iteration-count: 4;
 }
-.oultine_blink_class{
-    animation-name: outline-blink;
+
+.border_blink_class{
+    animation-name: border-blink;
     animation-iteration-count: infinite;
     animation-duration: 4s;
 }
@@ -262,7 +276,7 @@ input[type=number]
     justify-content: space-evenly;
     align-content: space-around;
     border: 6px solid var(--arrow-gold);
-    outline: 6px solid var(--main-red-theme);
+    box-shadow: 0 0 0 6px var(--main-red-theme);
     border-radius: 30px;
 
 
