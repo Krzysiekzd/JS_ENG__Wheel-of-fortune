@@ -1,4 +1,4 @@
-let choice_array = []
+let choice_array = [{label: 'Option 1', probability: 0}, {label: 'Option 2', probability: 0}]
 let start = document.getElementById('start')
 let spin_wheel = document.getElementById('rotation')
 let spin_wheel_wrapper = document.getElementById('rotation_wrapper')
@@ -6,7 +6,7 @@ let table = document.getElementById("select_table")
 let add_row = document.getElementById('add_row')
 let winner_field = document.getElementById('winner')
 let timeout = undefined
-let last_option_number = 1
+let last_option_number = 3
 let probability_mode = document.getElementById('probability_mode')
 let error = document.getElementById('error')
 let blinking_border = document.getElementById('blinking_border')
@@ -170,6 +170,44 @@ function update_table(){
     error.style.visibility = 'hidden'
 
 }
+function start_wheel_spin_process(){
+    if (start.textContent==='START') {
+        let winning_number = 0
+        // draw winning result
+        if (probability_mode.value === 'custom') {
+            let probabilities_sum = 0
+            for (let i in choice_array) {
+                probabilities_sum += choice_array[i]['probability']
+            }
+            if (probabilities_sum == 100) {
+                let draw_number = getRandomInt(1, 100)
+                let sum = 0
+                for (let i in choice_array) {
+                    if (sum + choice_array[i]['probability'] >= draw_number) {
+                        winning_number = i
+                        break
+                    } else {
+                        sum += choice_array[i]['probability']
+                    }
+                }
+                error.style.visibility = 'hidden'
+                rotate_the_wheel(winning_number)
+            }
+            else
+            {
+                error.textContent = `Probabilities sum must be equal to 100, current sum: ${probabilities_sum}`
+                error.style.visibility = 'visible'
+
+            }
+        }
+        else if (probability_mode.value === 'equal'){
+            winning_number = getRandomInt(0, choice_array.length - 1)
+            rotate_the_wheel(winning_number)
+        }
+    }
+    else{clear_wheel_spin()}
+
+}
 function rotate_the_wheel(winning_number){
     let field_deg = 360 / choice_array.length
     /*
@@ -225,53 +263,16 @@ add_row.addEventListener('click', ()=>{
 
 })
 start.addEventListener('click', ()=>{
-    if (start.textContent==='START') {
-        let winning_number = 0
-        // draw winning result
-        if (probability_mode.value === 'custom') {
-            let probabilities_sum = 0
-            for (let i in choice_array) {
-                probabilities_sum += choice_array[i]['probability']
-            }
-            if (probabilities_sum == 100) {
-                let draw_number = getRandomInt(1, 100)
-                let sum = 0
-                for (let i in choice_array) {
-                    if (sum + choice_array[i]['probability'] >= draw_number) {
-                        winning_number = i
-                        break
-                    } else {
-                        sum += choice_array[i]['probability']
-                    }
-                }
-                error.style.visibility = 'hidden'
-                rotate_the_wheel(winning_number)
-            }
-            else
-            {
-                error.textContent = `Probabilities sum must be equal to 100, current sum: ${probabilities_sum}`
-                error.style.visibility = 'visible'
-
-            }
-        }
-        else if (probability_mode.value === 'equal'){
-            winning_number = getRandomInt(0, choice_array.length - 1)
-            rotate_the_wheel(winning_number)
-        }
-        }
-    else{clear_wheel_spin()}
-
+        start_wheel_spin_process()
     })
+blinking_border.addEventListener('click', ()=>{
+    start_wheel_spin_process()
+})
 /*document.getElementById('equal_probabilities').addEventListener('click', ()=>{
     set_equal_probabilities()
 })
-
  */
-
-/*
-{
-
-
-}*/
+// calling update table to create 2 existing options on page load
+update_table()
 
 

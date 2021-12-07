@@ -81,6 +81,14 @@ header
     border-radius: 50%;
     /* rotate to hide uneven dashed border (Chromium) under the arrow  */
     transform: rotate(270deg);
+    cursor: pointer;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+    -webkit-tap-highlight-color: transparent;
 }
 #little_wheel
 {
@@ -142,6 +150,7 @@ select
 #rotation_wrapper
 {
     margin: auto;
+    border-radius: 50%;
 
 }
 @keyframes spin
